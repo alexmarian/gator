@@ -7,11 +7,7 @@ import (
 	"github.com/alexmarian/gator/internal/state"
 )
 
-func HandleFollowing(state *state.State, cmd Command) error {
-	user, err := state.Db.GetUser(context.Background(), state.Config.CurrentUserName)
-	if err != nil {
-		return fmt.Errorf("error getting user: %v", err)
-	}
+func HandleFollowing(state *state.State, cmd Command, user database.User) error {
 	feeds, err := state.Db.GetFeedFollowsForUser(context.Background(), user.ID)
 	if err != nil {
 		return fmt.Errorf("error creating feeds: %v", err)

@@ -9,13 +9,9 @@ import (
 	"time"
 )
 
-func HandleFollow(state *state.State, cmd Command) error {
+func HandleFollow(state *state.State, cmd Command, user database.User) error {
 	if len(cmd.Args) != 1 {
 		return fmt.Errorf("<url> is required")
-	}
-	user, err := state.Db.GetUser(context.Background(), state.Config.CurrentUserName)
-	if err != nil {
-		return fmt.Errorf("user does not exist: %v", err)
 	}
 	feed, err := state.Db.GetFeedByURL(context.Background(), cmd.Args[0])
 	if err != nil {

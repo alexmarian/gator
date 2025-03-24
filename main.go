@@ -49,9 +49,9 @@ func getCommands() *commands.Commands {
 	cmds.Register("reset", commands.HandleReset)
 	cmds.Register("users", commands.HandleUsers)
 	cmds.Register("agg", commands.HandleAgg)
-	cmds.Register("addfeed", commands.HandleAddFeed)
+	cmds.Register("addfeed", commands.MiddlewareLoggedIn(commands.HandleAddFeed))
 	cmds.Register("feeds", commands.HandleFeeds)
-	cmds.Register("follow", commands.HandleFollow)
-	cmds.Register("following", commands.HandleFollowing)
+	cmds.Register("follow", commands.MiddlewareLoggedIn(commands.HandleFollow))
+	cmds.Register("following", commands.MiddlewareLoggedIn(commands.HandleFollowing))
 	return &cmds
 }

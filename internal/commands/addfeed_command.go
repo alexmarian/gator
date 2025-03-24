@@ -9,13 +9,9 @@ import (
 	"time"
 )
 
-func HandleAddFeed(state *state.State, cmd Command) error {
+func HandleAddFeed(state *state.State, cmd Command, user database.User) error {
 	if len(cmd.Args) != 2 {
 		return fmt.Errorf("<name> <url> are required")
-	}
-	user, err := state.Db.GetUser(context.Background(), state.Config.CurrentUserName)
-	if err != nil {
-		return fmt.Errorf("user does not exist: %v", err)
 	}
 	feedParam := database.CreateFeedParams{ID: uuid.New(), Name: cmd.Args[0], CreatedAt: time.Now(), UpdatedAt: time.Now(), Url: cmd.Args[1], UserID: user.ID}
 	feed, err := state.Db.CreateFeed(context.Background(), feedParam)
