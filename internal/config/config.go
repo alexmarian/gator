@@ -59,5 +59,9 @@ func write(cfg Config) error {
 	return nil
 }
 func getConfigFilePath() (string, error) {
-	return configFileName, nil
+	userHomeDir, err := os.UserHomeDir()
+	if err != nil {
+		return "", err
+	}
+	return userHomeDir + "/" + configFileName, nil
 }
