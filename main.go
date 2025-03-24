@@ -52,6 +52,7 @@ func getCommands() *commands.Commands {
 	cmds.Register("addfeed", commands.MiddlewareLoggedIn(commands.HandleAddFeed))
 	cmds.Register("feeds", commands.HandleFeeds)
 	cmds.Register("follow", commands.MiddlewareLoggedIn(commands.HandleFollow))
+	cmds.Register("unfollow", commands.MiddlewareLoggedIn(commands.HandleUnfollow))
 	cmds.Register("following", commands.MiddlewareLoggedIn(commands.HandleFollowing))
 	return &cmds
 }
