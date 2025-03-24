@@ -49,5 +49,6 @@ func getCommands() *commands.Commands {
 	cmds.Register("reset", commands.HandleReset)
 	cmds.Register("users", commands.HandleUsers)
 	cmds.Register("agg", commands.HandleAgg)
+	cmds.Register("addfeed", commands.HandleAddFeed)
 	return &cmds
 }

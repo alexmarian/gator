@@ -25,6 +25,12 @@ func HandleRegister(state *state.State, cmd Command) error {
 		return fmt.Errorf("error creating user: %v", err)
 	}
 	state.Config.SetUser(createUser.Name)
-	fmt.Printf("User registered %v\n", createUser)
+	fmt.Println("User created successfully:")
+	printUser(createUser)
 	return nil
+}
+
+func printUser(user database.User) {
+	fmt.Printf(" * ID:      %v\n", user.ID)
+	fmt.Printf(" * Name:    %v\n", user.Name)
 }
