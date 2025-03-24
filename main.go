@@ -1,12 +1,15 @@
 package main
 
 import (
+	"database/sql"
 	"github.com/alexmarian/gator/internal/commands"
 	"github.com/alexmarian/gator/internal/config"
+	"github.com/alexmarian/gator/internal/database"
 	"github.com/alexmarian/gator/internal/state"
 	"log"
 	"os"
 )
+import _ "github.com/lib/pq"
 
 const configUserName = "lane"
 
@@ -15,8 +18,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("error reading config: %v", err)
 	}
+	db, err := sql.Open("postgres", cfg.DbUrl)
+	if err != nil {
+		log.Fatalf("error opening db: %v", err)
+	}
+	dbQueries := database.New(db)
 	state := state.State{
 		Config: cfg,
+		Db:     dbQueries,
 	}
 	if len(os.Args) < 2 {
 		log.Fatalf("usage: %s <command> [args]", os.Args[0])
@@ -36,5 +45,6 @@ func main() {
 func getCommands() *commands.Commands {
 	cmds := commands.Commands{}
 	cmds.Register("login", commands.HandleLogin)
+	cmds.Register("register", commands.HandleRegister)
 	return &cmds
 }
