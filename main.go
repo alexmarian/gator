@@ -46,5 +46,6 @@ func getCommands() *commands.Commands {
 	cmds := commands.Commands{}
 	cmds.Register("login", commands.HandleLogin)
 	cmds.Register("register", commands.HandleRegister)
+	cmds.Register("reset", commands.HandleReset)
 	return &cmds
 }
