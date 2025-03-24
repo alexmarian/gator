@@ -27,4 +27,5 @@ func printFeedExcerpt(feed database.GetAllFeedsWithUserNamesRow) {
 	fmt.Printf("* Name:          %s\n", feed.Name)
 	fmt.Printf("* URL:           %s\n", feed.Url)
 	fmt.Printf("* Username:        %s\n", feed.UserName)
+	fmt.Printf("* LastFetchedAt: %v\n", feed.LastFetchedAt.Time)
 }

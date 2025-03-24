@@ -54,5 +54,6 @@ func getCommands() *commands.Commands {
 	cmds.Register("follow", commands.MiddlewareLoggedIn(commands.HandleFollow))
 	cmds.Register("unfollow", commands.MiddlewareLoggedIn(commands.HandleUnfollow))
 	cmds.Register("following", commands.MiddlewareLoggedIn(commands.HandleFollowing))
+	cmds.Register("browse", commands.MiddlewareLoggedIn(commands.HandleBrowse))
 	return &cmds
 }
