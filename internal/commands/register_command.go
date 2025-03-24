@@ -13,7 +13,6 @@ func HandleRegister(state *state.State, cmd Command) error {
 	if len(cmd.Args) != 1 {
 		return fmt.Errorf("<username> is required")
 	}
-	fmt.Printf("Running command %v", cmd.Args)
 	_, err := state.Db.GetUser(context.Background(), cmd.Args[0])
 	if err == nil {
 		return fmt.Errorf("error user already exists")

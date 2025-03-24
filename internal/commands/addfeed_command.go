@@ -28,6 +28,15 @@ func HandleAddFeed(state *state.State, cmd Command) error {
 	fmt.Println()
 	fmt.Println("=====================================")
 
+	feedFollowParams := database.CreateFeedFollowParams{ID: uuid.New(), UserID: user.ID, FeedID: feed.ID, CreatedAt: time.Now(), UpdatedAt: time.Now()}
+	feedFollowRow, err := state.Db.CreateFeedFollow(context.Background(), feedFollowParams)
+	if err != nil {
+		return fmt.Errorf("error creating feed follow: %v", err)
+	}
+	fmt.Println("Feed followed successfully:")
+	printFeedFollow(feedFollowRow)
+	fmt.Println()
+	fmt.Println("=====================================")
 	return nil
 }
 
